@@ -268,9 +268,6 @@
     <ClCompile Include="..\..\classify\errorcounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\classify\extract.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\classify\featdefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -292,9 +289,6 @@
     <ClCompile Include="..\..\ccmain\fixxht.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\classify\flexfx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\classify\float2int.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -305,9 +299,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\cutil\freelist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\classify\fxdefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\textord\gap_map.cpp">
@@ -385,9 +376,6 @@
     <ClCompile Include="..\..\ccmain\ltrresultiterator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\wordrec\makechop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\textord\makerow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -443,9 +431,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\cutil\oldlist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\wordrec\olutil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\classify\mfdefs.cpp">
@@ -772,15 +757,13 @@
     <ClCompile Include="..\..\textord\workingpartset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\classify\xform2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\api\pdfrenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ccmain\par_control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ccstruct\imagedata.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\classify\adaptive.h">
@@ -1053,12 +1036,6 @@
     <ClInclude Include="..\..\classify\errorcounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\classify\extern.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\classify\extract.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\classify\featdefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1083,9 +1060,6 @@
     <ClInclude Include="..\..\ccmain\fixspace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\classify\flexfx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\classify\float2int.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1102,9 +1076,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\cutil\freelist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\classify\fxdefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\textord\gap_map.h">
@@ -1215,9 +1186,6 @@
     <ClInclude Include="..\..\ccmain\ltrresultiterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\wordrec\makechop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\textord\makerow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1303,9 +1271,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\cutil\oldlist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\wordrec\olutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\opencl\openclwrapper.h">
@@ -1611,9 +1576,6 @@
     <ClInclude Include="..\..\cube\word_list_lang_model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\classify\xform2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\cube\word_size_model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1629,6 +1591,8 @@
     <ClInclude Include="..\..\textord\workingpartset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ccstruct\imagedata.h" />
+    <ClInclude Include="..\port\vcsversion.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

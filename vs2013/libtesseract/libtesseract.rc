@@ -7,19 +7,17 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include "windows.h"
+#include "afxres.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -72,7 +70,7 @@ BEGIN
             VALUE "FileDescription", "Tesseract OCR library"
             VALUE "FileVersion", "3, 4, 0, 0"
             VALUE "InternalName", "libtesseract"
-            VALUE "LegalCopyright", "Copyright (C) 2014 Google, Inc. Licensed under the Apache License, Version 2.0"
+            VALUE "LegalCopyright", "Copyright (C) 2015 Google, Inc. Licensed under the Apache License, Version 2.0"
             VALUE "OriginalFilename", "libtesseract"
             VALUE "ProductName", "Tesseract OCR Library"
             VALUE "ProductVersion", "3, 4, 0, 0"
@@ -84,7 +82,7 @@ BEGIN
     END
 END
 
-#endif    // English (U.S.) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
