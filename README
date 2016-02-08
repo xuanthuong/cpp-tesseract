@@ -32,6 +32,15 @@ compiles without Leptonica.
 
 Libtiff is no longer required as a direct dependency.
 
+### Leptonica & Dependencies licenses
+
+All projects are made available under their original license(s).
+
+* Leptonica - ``~/leptonica/liblept/leptonica-license.txt``
+* GifLib - ``~/leptonica/giflib/COPYING``
+* LibJpeg - ``~/leptonica/libjpeg/README``
+* LibPng - ``~/leptonica/libpng/LICENSE``
+* libtff - ``~/leptonica/libtiff/COPYRIGHT``
 
 Installing and Running Tesseract
 --------------------------------
