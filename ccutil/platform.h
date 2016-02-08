@@ -29,7 +29,10 @@
 #endif  /* __GNUC__ */
 #define SIGNED
 #if defined(_MSC_VER)
+#if (_MSC_VER < 1900)
+// VS2015 now supports snprintf (http://stackoverflow.com/questions/27754492/vs-2015-compiling-cocos2d-x-3-3-error-fatal-error-c1189-error-macro-definiti)
 #define snprintf _snprintf
+#endif  /* (_MSC_VER < 1900) */
 #if (_MSC_VER <= 1400)
 #define vsnprintf _vsnprintf
 #endif /* (_MSC_VER <= 1400) */
