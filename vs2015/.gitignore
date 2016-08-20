@@ -1,0 +1,4 @@
+# VS 2015
+bin/**
+obj/**
+*.VC.opendb
