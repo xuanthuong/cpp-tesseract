@@ -376,6 +376,7 @@ int main(int argc, char **argv) {
      api.PrintVariables(fout);
      api.End();
      exit(0);
+	 std::cout << "abc";
   }
 
   FixPageSegMode(&api, pagesegmode);
