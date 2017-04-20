@@ -1003,6 +1003,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib
     <ClInclude Include="..\..\ccmain\reject.h" />
     <ClInclude Include="..\..\wordrec\render.h" />
     <ClInclude Include="..\port\vcsversion.h" />
+    <ClInclude Include="afxres.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="..\..\ccmain\resultiterator.h" />
     <ClInclude Include="..\..\classify\sampleiterator.h" />

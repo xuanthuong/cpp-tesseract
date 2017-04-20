@@ -8,6 +8,9 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "afxres.h"
+//#include "WinResrc.h"
+//#define IDC_STATIC  -1
+//http://stackoverflow.com/questions/3566018/cannot-open-include-file-afxres-h-in-vc2010-express
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS

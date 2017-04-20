@@ -1593,6 +1593,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ccstruct\imagedata.h" />
     <ClInclude Include="..\port\vcsversion.h" />
+    <ClInclude Include="afxres.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
