@@ -336,107 +336,145 @@ void PreloadRenderers(tesseract::TessBaseAPI* api,
  *
  **********************************************************************/
 int main(int argc, char **argv) {
-  const char* lang = "eng";
-  const char* image = NULL;
-  const char* outputbase = NULL;
-  const char* datapath = NULL;
-  bool list_langs = false;
-  bool print_parameters = false;
-  GenericVector<STRING> vars_vec, vars_values;
-  int arg_i = 1;
-  tesseract::PageSegMode pagesegmode = tesseract::PSM_AUTO;
+	tesseract::TessBaseAPI *api = new tesseract::TessBaseAPI();
 
-  ParseArgs(argc, argv,
-          &lang, &image, &outputbase, &datapath,
-          &list_langs, &print_parameters,
-          &vars_vec, &vars_values, &arg_i, &pagesegmode);
+	if (api->Init(NULL, "eng")) {
+		fprintf(stderr, "Could not initialize tesseract.\n");
+		exit(1);
+	}
 
-  PERF_COUNT_START("Tesseract:main")
-  tesseract::TessBaseAPI api;
+	Pix *pix = pixRead("D:\\test3.png");
+	api->SetImage(pix);
 
-  api.SetOutputName(outputbase);
+	int lcount = 1;
+	api->Recognize(0);
+	tesseract::ResultIterator* ri = api->GetIterator();
+	if (ri != 0) {
+		do {
+			const char* word = ri->GetUTF8Text(tesseract::RIL_WORD);
+			if (word != 0) {
+				const char *font_name;
+				bool bold, italic, underlined, monospace, serif, smallcaps;
+				int pointsize, font_id;
+				font_name = ri->WordFontAttributes(&bold, &italic, &underlined,
+					&monospace, &serif,
+					&smallcaps, &pointsize,
+					&font_id);
+				printf("%s \t=> fontname: %s, size: %d, font_id: %d, bold: %d,"\
+					" italic: %d, underlined: %d, monospace: %d, serif: %d,"\
+					" smallcap: %d\n", word, font_name, pointsize, font_id,
+					bold, italic, underlined, monospace, serif, smallcaps);
+			}
+			delete[] word;
+			lcount++;
+		} while (ri->Next(tesseract::RIL_WORD));
+	}
 
-  int init_failed = api.Init(datapath, lang, tesseract::OEM_DEFAULT,
-                &(argv[arg_i]), argc - arg_i, &vars_vec, &vars_values, false);
-  if (init_failed) {
-    fprintf(stderr, "Could not initialize tesseract.\n");
-    exit(1);
-  }
+	delete ri;
+	api->End();
+	pixDestroy(&pix);
+	return 0;
 
-  SetVariablesFromCLArgs(&api, argc, argv);
+  //const char* lang = "eng";
+  //const char* image = NULL;
+  //const char* outputbase = NULL;
+  //const char* datapath = NULL;
+  //bool list_langs = false;
+  //bool print_parameters = false;
+  //GenericVector<STRING> vars_vec, vars_values;
+  //int arg_i = 1;
+  //tesseract::PageSegMode pagesegmode = tesseract::PSM_AUTO;
 
-  if (list_langs) {
-     PrintLangsList(&api);
-     exit(0);
-  }
+  //ParseArgs(argc, argv,
+  //        &lang, &image, &outputbase, &datapath,
+  //        &list_langs, &print_parameters,
+  //        &vars_vec, &vars_values, &arg_i, &pagesegmode);
 
-  if (print_parameters) {
-     FILE* fout = stdout;
-     fprintf(stdout, "Tesseract parameters:\n");
-     api.PrintVariables(fout);
-     api.End();
-     exit(0);
-	 std::cout << "abc";
-  }
+  //PERF_COUNT_START("Tesseract:main")
+  //tesseract::TessBaseAPI api;
 
-  FixPageSegMode(&api, pagesegmode);
+  //api.SetOutputName(outputbase);
 
-  if (pagesegmode == tesseract::PSM_AUTO_ONLY) {
-    int ret_val = 0;
+  //int init_failed = api.Init(datapath, lang, tesseract::OEM_DEFAULT,
+  //              &(argv[arg_i]), argc - arg_i, &vars_vec, &vars_values, false);
+  //if (init_failed) {
+  //  fprintf(stderr, "Could not initialize tesseract.\n");
+  //  exit(1);
+  //}
 
-    Pix* pixs = pixRead(image);
-    if (!pixs) {
-      fprintf(stderr, "Cannot open input file: %s\n", image);
-      exit(2);
-    }
+  //SetVariablesFromCLArgs(&api, argc, argv);
 
-    api.SetImage(pixs);
+  //if (list_langs) {
+  //   PrintLangsList(&api);
+  //   exit(0);
+  //}
 
-    tesseract::Orientation orientation;
-    tesseract::WritingDirection direction;
-    tesseract::TextlineOrder order;
-    float deskew_angle;
+  //if (print_parameters) {
+  //   FILE* fout = stdout;
+  //   fprintf(stdout, "Tesseract parameters:\n");
+  //   api.PrintVariables(fout);
+  //   api.End();
+  //   exit(0);
+  //}
 
-    tesseract::PageIterator* it =  api.AnalyseLayout();
-    if (it) {
-      it->Orientation(&orientation, &direction, &order, &deskew_angle);
-      tprintf("Orientation: %d\nWritingDirection: %d\nTextlineOrder: %d\n" \
-             "Deskew angle: %.4f\n",
-              orientation, direction, order, deskew_angle);
-    } else {
-      ret_val = 1;
-    }
+  //FixPageSegMode(&api, pagesegmode);
 
-    delete it;
+  //if (pagesegmode == tesseract::PSM_AUTO_ONLY) {
+  //  int ret_val = 0;
 
-    pixDestroy(&pixs);
-    exit(ret_val);
-  }
+  //  Pix* pixs = pixRead(image);
+  //  if (!pixs) {
+  //    fprintf(stderr, "Cannot open input file: %s\n", image);
+  //    exit(2);
+  //  }
 
-  // set in_training_mode to true when using one of these configs:
-  // ambigs.train, box.train, box.train.stderr, linebox, rebox
-  bool b = false;
-  bool in_training_mode =
-        (api.GetBoolVariable("tessedit_ambigs_training", &b) && b) ||
-        (api.GetBoolVariable("tessedit_resegment_from_boxes", &b) && b) ||
-        (api.GetBoolVariable("tessedit_make_boxes_from_boxes", &b) && b);
+  //  api.SetImage(pixs);
 
-  tesseract::PointerVector<tesseract::TessResultRenderer> renderers;
+  //  tesseract::Orientation orientation;
+  //  tesseract::WritingDirection direction;
+  //  tesseract::TextlineOrder order;
+  //  float deskew_angle;
 
-  if (in_training_mode) {
-    renderers.push_back(NULL);
-  } else {
-    PreloadRenderers(&api, &renderers, pagesegmode, outputbase);
-  }
+  //  tesseract::PageIterator* it =  api.AnalyseLayout();
+  //  if (it) {
+  //    it->Orientation(&orientation, &direction, &order, &deskew_angle);
+  //    tprintf("Orientation: %d\nWritingDirection: %d\nTextlineOrder: %d\n" \
+  //           "Deskew angle: %.4f\n",
+  //            orientation, direction, order, deskew_angle);
+  //  } else {
+  //    ret_val = 1;
+  //  }
 
-  if (!renderers.empty()) {
-    bool succeed = api.ProcessPages(image, NULL, 0, renderers[0]);
-    if (!succeed) {
-      fprintf(stderr, "Error during processing.\n");
-      exit(1);
-    }
-  }
+  //  delete it;
 
-  PERF_COUNT_END
-  return 0;                      // Normal exit
+  //  pixDestroy(&pixs);
+  //  exit(ret_val);
+  //}
+
+  //// set in_training_mode to true when using one of these configs:
+  //// ambigs.train, box.train, box.train.stderr, linebox, rebox
+  //bool b = false;
+  //bool in_training_mode =
+  //      (api.GetBoolVariable("tessedit_ambigs_training", &b) && b) ||
+  //      (api.GetBoolVariable("tessedit_resegment_from_boxes", &b) && b) ||
+  //      (api.GetBoolVariable("tessedit_make_boxes_from_boxes", &b) && b);
+
+  //tesseract::PointerVector<tesseract::TessResultRenderer> renderers;
+
+  //if (in_training_mode) {
+  //  renderers.push_back(NULL);
+  //} else {
+  //  PreloadRenderers(&api, &renderers, pagesegmode, outputbase);
+  //}
+
+  //if (!renderers.empty()) {
+  //  bool succeed = api.ProcessPages(image, NULL, 0, renderers[0]);
+  //  if (!succeed) {
+  //    fprintf(stderr, "Error during processing.\n");
+  //    exit(1);
+  //  }
+  //}
+
+  //PERF_COUNT_END
+  //return 0;                      // Normal exit
 }
